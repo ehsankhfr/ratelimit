@@ -75,7 +75,7 @@ function ratelimit(opts = {}) {
     }
 
     debug('remaining %s/%s %s', remaining, limit.total, id);
-    if (limit.remaining) return await next();
+    if (limit.remaining) return next();
 
     const delta = (limit.reset * 1000) - Date.now() | 0;
     const after = limit.reset - (Date.now() / 1000) | 0;
@@ -95,7 +95,7 @@ function ratelimit(opts = {}) {
  */
 
 async function thenify(fn) {
-  return await new Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
     function callback(err, res) {
       if (err) return reject(err);
       return resolve(res);
